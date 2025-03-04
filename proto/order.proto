@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "go-rest-grpc-graphql-clean-architecture/proto";
+
+import "google/protobuf/timestamp.proto";
+
+service OrderService {
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {}
+}
+
+message ListOrdersRequest {}
+
+message Order {
+  string id = 1;
+  string customer_name = 2;
+  double total = 3;
+  string status = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+} 

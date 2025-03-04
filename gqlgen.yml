@@ -1,0 +1,38 @@
+# Onde encontrar o schema GraphQL
+schema:
+  - graph/*.graphqls
+
+# Configuração do pacote executável
+exec:
+  filename: graph/generated/generated.go
+  package: generated
+
+# Resolver é o pacote onde seus resolvers de implementação vivem
+resolver:
+  layout: follow-schema
+  dir: graph
+  package: graph
+  filename_template: "{name}.resolvers.go"
+
+# Configuração do modelo
+model:
+  filename: graph/model/models_gen.go
+  package: model
+
+# Opcional: habilita geração de modelos para todos os tipos
+autobind:
+  - "go-rest-grpc-graphql-clean-architecture/internal/domain"
+
+# Mapeamentos de tipos personalizados
+models:
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.ID
+      - github.com/99designs/gqlgen/graphql.Int
+      - github.com/99designs/gqlgen/graphql.Int64
+      - github.com/99designs/gqlgen/graphql.Int32
+  Int:
+    model:
+      - github.com/99designs/gqlgen/graphql.Int
+      - github.com/99designs/gqlgen/graphql.Int64
+      - github.com/99designs/gqlgen/graphql.Int32 

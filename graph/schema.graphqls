@@ -1,0 +1,12 @@
+type Order {
+  id: ID!
+  customerName: String!
+  total: Float!
+  status: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Query {
+  listOrders: [Order!]!
+} 

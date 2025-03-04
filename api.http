@@ -1,0 +1,23 @@
+### Create Order
+POST http://localhost:8080/order
+Content-Type: application/json
+
+{
+    "customer_name": "John Doe",
+    "total": 99.99,
+    "status": "pending"
+}
+
+### List Orders (REST)
+GET http://localhost:8080/order
+
+### List Orders (GraphQL)
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+    "query": "query { listOrders { id customerName total status createdAt } }"
+}
+
+### Note: gRPC requests cannot be made directly through HTTP. Use a gRPC client like grpcurl:
+### grpcurl -plaintext localhost:50051 order.OrderService/ListOrders 
