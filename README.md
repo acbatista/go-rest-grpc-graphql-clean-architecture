@@ -150,11 +150,12 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👥 Autores
 
-- Seu Nome - [@seu-usuario](https://github.com/seu-usuario)
+- Seu Nome - [@acbatista](https://github.com/acbatista)
 
 ## 🙏 Agradecimentos
 
+- [FullCycle - Pos- GoExpert](https://goexpert.fullcycle.com.br/pos-goexpert/)
 - [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [Go](https://golang.org/)
 - [gRPC](https://grpc.io/)
-- [GraphQL](https://graphql.org/) 
+- [GraphQL](https://graphql.org/)
