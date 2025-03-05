@@ -14,6 +14,7 @@ import (
 	"github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	mysqldriver "gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
@@ -80,6 +81,7 @@ func main() {
 	grpcServer := grpc.NewServer()
 	orderServer := grpcserver.NewOrderServer(listOrdersUseCase)
 	pb.RegisterOrderServiceServer(grpcServer, orderServer)
+	reflection.Register(grpcServer)
 
 	// Setup GraphQL server
 	resolver := graph.NewResolver(listOrdersUseCase, createOrderUseCase)

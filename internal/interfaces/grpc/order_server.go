@@ -1,4 +1,4 @@
-package grpc
+package grpcserver
 
 import (
 	"context"
@@ -9,26 +9,29 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+// OrderServer implementa o serviço gRPC de pedidos
 type OrderServer struct {
 	pb.UnimplementedOrderServiceServer
-	listOrdersUseCase *usecase.ListOrdersUseCase
+	listOrdersUseCase usecase.ListOrdersUseCase
 }
 
-func NewOrderServer(listOrdersUseCase *usecase.ListOrdersUseCase) *OrderServer {
+// NewOrderServer cria uma nova instância do servidor gRPC
+func NewOrderServer(listOrdersUseCase usecase.ListOrdersUseCase) *OrderServer {
 	return &OrderServer{
 		listOrdersUseCase: listOrdersUseCase,
 	}
 }
 
+// ListOrders retorna a lista de todos os pedidos
 func (s *OrderServer) ListOrders(ctx context.Context, req *pb.ListOrdersRequest) (*pb.ListOrdersResponse, error) {
 	orders, err := s.listOrdersUseCase.Execute()
 	if err != nil {
 		return nil, err
 	}
 
-	var pbOrders []*pb.Order
+	var responseOrders []*pb.Order
 	for _, order := range orders {
-		pbOrders = append(pbOrders, &pb.Order{
+		responseOrders = append(responseOrders, &pb.Order{
 			Id:           order.ID,
 			CustomerName: order.CustomerName,
 			Total:        order.Total,
@@ -39,6 +42,6 @@ func (s *OrderServer) ListOrders(ctx context.Context, req *pb.ListOrdersRequest)
 	}
 
 	return &pb.ListOrdersResponse{
-		Orders: pbOrders,
+		Orders: responseOrders,
 	}, nil
 }

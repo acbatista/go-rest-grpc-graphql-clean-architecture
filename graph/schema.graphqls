@@ -9,4 +9,14 @@ type Order {
 
 type Query {
   listOrders: [Order!]!
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order!
+}
+
+input CreateOrderInput {
+  customerName: String!
+  total: Float!
+  status: String!
 } 

@@ -1,21 +1,31 @@
 package usecase
 
 import (
-	"time"
-
 	"go-rest-grpc-graphql-clean-architecture/internal/domain"
+	"time"
 )
 
-type CreateOrderUseCase struct {
-	repo domain.OrderRepository
+// CreateOrderUseCaseImpl implementa o caso de uso para criar um pedido
+type CreateOrderUseCaseImpl struct {
+	orderRepository domain.OrderRepository
 }
 
-func NewCreateOrderUseCase(repo domain.OrderRepository) *CreateOrderUseCase {
-	return &CreateOrderUseCase{repo: repo}
+// NewCreateOrderUseCase cria uma nova instância do caso de uso
+func NewCreateOrderUseCase(orderRepository domain.OrderRepository) CreateOrderUseCase {
+	return &CreateOrderUseCaseImpl{
+		orderRepository: orderRepository,
+	}
 }
 
-func (uc *CreateOrderUseCase) Execute(order *domain.Order) error {
-	order.CreatedAt = time.Now()
-	order.UpdatedAt = time.Now()
-	return uc.repo.Create(order)
+// Execute executa o caso de uso de criação de pedido
+func (u *CreateOrderUseCaseImpl) Execute(order *domain.Order) error {
+	if err := order.Validate(); err != nil {
+		return err
+	}
+
+	now := time.Now()
+	order.CreatedAt = now
+	order.UpdatedAt = now
+
+	return u.orderRepository.Create(order)
 }

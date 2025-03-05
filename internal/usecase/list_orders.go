@@ -4,14 +4,19 @@ import (
 	"go-rest-grpc-graphql-clean-architecture/internal/domain"
 )
 
-type ListOrdersUseCase struct {
-	repo domain.OrderRepository
+// ListOrdersUseCaseImpl implementa o caso de uso para listar pedidos
+type ListOrdersUseCaseImpl struct {
+	orderRepository domain.OrderRepository
 }
 
-func NewListOrdersUseCase(repo domain.OrderRepository) *ListOrdersUseCase {
-	return &ListOrdersUseCase{repo: repo}
+// NewListOrdersUseCase cria uma nova instância do caso de uso
+func NewListOrdersUseCase(orderRepository domain.OrderRepository) ListOrdersUseCase {
+	return &ListOrdersUseCaseImpl{
+		orderRepository: orderRepository,
+	}
 }
 
-func (uc *ListOrdersUseCase) Execute() ([]domain.Order, error) {
-	return uc.repo.List()
+// Execute executa o caso de uso de listagem de pedidos
+func (u *ListOrdersUseCaseImpl) Execute() ([]domain.Order, error) {
+	return u.orderRepository.List()
 }
