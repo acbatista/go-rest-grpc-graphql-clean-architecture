@@ -150,7 +150,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👥 Autores
 
-- Seu Nome - [@acbatista](https://github.com/acbatista)
+- Adriano Carvalho Batista - [@acbatista](https://github.com/acbatista)
 
 ## 🙏 Agradecimentos
 
